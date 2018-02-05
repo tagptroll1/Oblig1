@@ -6,7 +6,7 @@ import Deque.Exceptions.DequeFullException;
  * En samling som tillater innsetting og fjerning fra begge
  * sider av samlingen.
  */
-public interface ArrayDequeInterface<E> {
+public interface IDeque<E> {
 
     /**
      * Retunerer hvor mange elementer samlingen inneholder.
@@ -14,6 +14,20 @@ public interface ArrayDequeInterface<E> {
      * @return Størrelsen på samlingen.
      */
     int size();
+
+    /**
+     * Sjekker om arreyen som "er" dequen er full eller ikke
+     *
+     * @return true om den er full, false ellers
+     */
+    boolean isArrayFull();
+
+    /**
+     * sjekker om arrayen ikke har noen entries
+     *
+     * @return true om den er tom for entries, false ellers
+     */
+    boolean isArrayEmpty();
 
     /**
      * Legger til et element på begynnelsen av samlingen.
@@ -80,10 +94,10 @@ public interface ArrayDequeInterface<E> {
     /**
      * Retunerer en tabell med alle elementene i samlingen.
      *
-     * @param a En tabell med samme type som T[].
+     * @param a En tabell med samme type som E[].
      * @return En tabell med alle elementene i samlingen.
      */
-    <T> T[] toArray(T[] a);
+    <E> E[] toArray(E[] a);
 
     /**
      * Fjerner alle elementene fra samlingen.
