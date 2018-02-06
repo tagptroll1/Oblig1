@@ -25,11 +25,11 @@ public class Main {
         System.out.println("Elements in array: \n");
         String[] newArray = deque.toArray(new String[0]);
         for(String elem: newArray){
-            System.out.println(elem);
+            System.out.print("[" + elem + "], ");
         }
 
 
-        /*for (String stuff : addToAss){
+        for (String stuff : addToAss){
 
             try {
                 System.out.println("Added to last: " + stuff);
@@ -45,13 +45,10 @@ public class Main {
             System.out.println(elem);
         }
 
-*/
 
-
-/*
-        String[] dequeArray =(String[]) deque.toArray();
-        for (String str : dequeArray) {
-            System.out.print(str + ", ");
-        }*/
+        Object[] dequeArray = deque.toArray();
+        for (Object str : dequeArray) {
+            System.out.print((String) str + ", ");
+        }
     }
 }

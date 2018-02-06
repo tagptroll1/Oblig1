@@ -29,6 +29,17 @@ public class ArrayDeque<E> implements IDeque<E> {
     }
 
 
+    static final int inc(int i, int modulus) {
+        if (++i >= modulus) i = 0;
+        return i;
+    }
+
+
+    static final int dec(int i, int modulus) {
+        if (--i < 0) i = modulus - 1;
+        return i;
+    }
+
     @Override
     public int size() {
         return numberOfEntries;
@@ -47,7 +58,7 @@ public class ArrayDeque<E> implements IDeque<E> {
     @Override
     public void addFirst(E elem) throws DequeFullException {
         //TODO topIndex - 1 add element if topIndex-1 != botIndex
-        deque[topIndex = (topIndex - 1) & (deque.length - 1)] = elem;
+        deque[topIndex = dec(topIndex, deque.length)] = elem;
         numberOfEntries ++;
 
         if (topIndex == botIndex){
@@ -78,9 +89,10 @@ public class ArrayDeque<E> implements IDeque<E> {
 
     @Override
     public void addLast(E elem) throws DequeFullException {
-        deque[botIndex] = elem;
-        numberOfEntries++;
-        if ( (botIndex = (botIndex + 1) & (deque.length - 1)) == topIndex){
+        deque[botIndex = inc(botIndex, deque.length)] = elem;
+        numberOfEntries ++;
+
+        if ( botIndex == topIndex){
             throw new DequeFullException("Sumting wong");
         }
     }
