@@ -48,7 +48,7 @@ public class Main {
 
         Object[] dequeArray = deque.toArray();
         for (Object str : dequeArray) {
-            System.out.print((String) str + ", ");
+            System.out.print("[" + str + "], ");
         }
     }
 }
