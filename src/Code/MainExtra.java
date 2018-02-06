@@ -1,6 +1,6 @@
 package Code;
 
-public class Main {
+public class MainExtra {
     public static void main(String[] args) {
         /*Code.ArrayBag<Code.Coin> coinBag = new Code.ArrayBag<>();
         coinBag.add(new Code.Coin(20,1996));
