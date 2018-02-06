@@ -92,12 +92,19 @@ public interface IDeque<E> {
     boolean contains(Object elem);
 
     /**
+     * Returnere en tabell me alle elemente i samlingen
+     *
+     * @return En tabell med alle elemtenene i samlingen
+     */
+    Object[] toArray();
+
+    /**
      * Retunerer en tabell med alle elementene i samlingen.
      *
      * @param a En tabell med samme type som E[].
      * @return En tabell med alle elementene i samlingen.
      */
-    <E> E[] toArray(E[] a);
+    E[] toArray(E[] a);
 
     /**
      * Fjerner alle elementene fra samlingen.

@@ -3,6 +3,8 @@ package Deque;
 import Deque.Exceptions.DequeEmptyException;
 import Deque.Exceptions.DequeFullException;
 
+import java.util.Arrays;
+
 public class ArrayDeque<E> implements IDeque<E> {
     private E[] deque;
     private int numberOfEntries;
@@ -44,24 +46,26 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayFull()){
             throw new DequeFullException("Deque size exeeds deque's capacity");
         } else {
-
+            // Push everything back one, add to first
         }
     }
 
     @Override
     public E pullFirst() throws DequeEmptyException {
+        // Move everything forward?.. Or just keep open spots
         if (isArrayEmpty()){
             for (int i = 0; i < deque.length ; i ++){
                 if (deque[i] != null){
                     E temp = deque[i];
                     deque[i] = null;
+                    numberOfEntries--;
                     return temp;
                 }
             }
+            return null;
         } else {
             throw new DequeEmptyException("Deque doesn't contain any entries");
         }
-        return null;
     }
 
     @Override
@@ -83,7 +87,8 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayFull()){
             throw new DequeFullException("Deque size exeeds deque's capacity");
         } else {
-
+            deque[numberOfEntries] = elem;
+            numberOfEntries++;
         }
     }
 
@@ -92,9 +97,11 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayEmpty()){
             throw new DequeEmptyException("Deque doesn't contain any entries");
         } else {
-
+            E temp = deque[numberOfEntries];
+            deque[numberOfEntries] = null;
+            numberOfEntries--;
+            return temp;
         }
-        return null;
     }
 
     @Override
@@ -102,19 +109,35 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayEmpty()) {
             throw new DequeEmptyException("Deque doesn't contain any entries");
         } else {
-
+            return deque[numberOfEntries];
         }
-        return null;
     }
 
     @Override
-    public boolean contains(Object elem) {
+    public boolean contains(Object inputElem) {
+        if (!isArrayEmpty()){
+            for(E ele : deque){
+                if (ele.equals(inputElem)){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     @Override
-    public <E> E[] toArray(E[] a) {
-        return null;
+    public Object[] toArray() {
+        @SuppressWarnings("unchecked")
+        E[]result = (E[])new Object[numberOfEntries];
+        System.arraycopy(deque, 0, result,0,numberOfEntries);
+        return result;
+    }
+
+    @Override
+    public E[] toArray(E[] a){
+        @SuppressWarnings("unchecked")
+        E[]result = (E[]) Arrays.copyOf(deque, numberOfEntries, a.getClass());
+        return result;
     }
 
     @Override
@@ -122,5 +145,6 @@ public class ArrayDeque<E> implements IDeque<E> {
         for (int i = 0; i < deque.length; i++){
             deque[i] = null;
         }
+        numberOfEntries = 0;
     }
 }
