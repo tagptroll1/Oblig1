@@ -89,7 +89,7 @@ public interface IDeque<E> {
      * @param elem Elementet som kanskje er i samlingen.
      * @return retunerer true hvis elementet er i samlingen.
      */
-    boolean contains(Object elem);
+    boolean contains(E elem);
 
     /**
      * Returnere en tabell me alle elemente i samlingen

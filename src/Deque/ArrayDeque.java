@@ -26,18 +26,28 @@ public class ArrayDeque<E> implements IDeque<E> {
         E[] tempDeque = (E[]) new Object[capacity];
         deque = tempDeque;
         numberOfEntries = 0;
+        topIndex = capacity;
+        botIndex = 0;
     }
 
 
-    static final int inc(int i, int modulus) {
+    private static int inc(int i, int modulus) {
         if (++i >= modulus) i = 0;
         return i;
     }
 
 
-    static final int dec(int i, int modulus) {
+    private static int dec(int i, int modulus) {
         if (--i < 0) i = modulus - 1;
         return i;
+    }
+
+    public int getBotIndex() {
+        return botIndex;
+    }
+
+    public int getTopIndex(){
+        return topIndex;
     }
 
     @Override
@@ -57,13 +67,11 @@ public class ArrayDeque<E> implements IDeque<E> {
 
     @Override
     public void addFirst(E elem) throws DequeFullException {
-        //TODO topIndex - 1 add element if topIndex-1 != botIndex
-        deque[topIndex = dec(topIndex, deque.length)] = elem;
-        numberOfEntries ++;
-
-        if (topIndex == botIndex){
+        if (isArrayFull()){
             throw new DequeFullException("sumting made top to bot");
         }
+        deque[topIndex = dec(topIndex, deque.length)] = elem;
+        numberOfEntries ++;
     }
 
     @Override
@@ -71,10 +79,9 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayEmpty()){
             throw new DequeEmptyException("Deque doesn't contain any entries");
         }
-        //TODO First er ikke nøvendigvis fremst i arrayet fixie fix
-        //topIndex = getTop();
         E temp = deque[topIndex];
         deque[topIndex] = null;
+        topIndex = inc(topIndex, deque.length);
         numberOfEntries--;
         return temp;
     }
@@ -89,12 +96,12 @@ public class ArrayDeque<E> implements IDeque<E> {
 
     @Override
     public void addLast(E elem) throws DequeFullException {
-        deque[botIndex = inc(botIndex, deque.length)] = elem;
-        numberOfEntries ++;
-
-        if ( botIndex == topIndex){
+        if (isArrayFull() && topIndex == (botIndex = inc(botIndex, deque.length))){
             throw new DequeFullException("Sumting wong");
         }
+        deque[botIndex] = elem;
+        numberOfEntries ++;
+
     }
 
     @Override
@@ -102,10 +109,9 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayEmpty()){
             throw new DequeEmptyException("Deque doesn't contain any entries");
         }
-        E temp = deque[botIndex];
-        deque[botIndex] = null;
+        E temp = deque[dec(botIndex, deque.length)];
+        deque[botIndex = dec(botIndex, deque.length)] = null;
         numberOfEntries--;
-        botIndex = (botIndex - 1) & (deque.length - 1);
         return temp;
     }
 
@@ -114,15 +120,15 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayEmpty()) {
             throw new DequeEmptyException("Deque doesn't contain any entries");
         }
-        return deque[botIndex];
+        return deque[dec(botIndex, deque.length)];
     }
 
     @Override
-    public boolean contains(Object inputElem) {
+    public boolean contains(E inputElem) {
         if (isArrayEmpty()) {
             return false;
         }
-
+        
         for(E ele : deque){
             if (ele.equals(inputElem)){
                 return true;
