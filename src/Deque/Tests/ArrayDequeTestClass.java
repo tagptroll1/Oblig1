@@ -6,27 +6,26 @@ import Deque.Exceptions.DequeFullException;
 import java.util.Arrays;
 
 public class ArrayDequeTestClass implements ArrayDequesTestInterface {
-    private ArrayDeque<String> defaultDeque;
+    //private ArrayDeque<String> defaultDeque;
     private ArrayDeque<String> deque;
 
     public ArrayDequeTestClass(){
-        deque = new ArrayDeque<>(5); // Preset size of 5
-        defaultDeque = new ArrayDeque<>(); // Default size deque
+        deque = new ArrayDeque<>(10); // Preset size of 5
+        //defaultDeque = new ArrayDeque<>(); // Default size deque
     }
 
     public ArrayDeque<String> getDeque() {
         return deque;
     }
 
-    public ArrayDeque<String> getDefaultDeque() {
+/*    public ArrayDeque<String> getDefaultDeque() {
         return defaultDeque;
-    }
+    }*/
 
     @Override
     public boolean testAddingTopElements() {
         boolean returnValue = true;
-        String[] firstArray = {"Text", "String", "1", "2"};
-        String[] secondArray = {"Text", "from", "second"};
+        String[] firstArray = {"1", "2", "3", "4"};
         System.out.println("Adding " + Arrays.toString(firstArray) + " to deque");
 
         try {
@@ -36,14 +35,14 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
             returnValue = false;
         }
 
-        System.out.println("Adding " + Arrays.toString(secondArray) + " to defaultdeque");
+        /*System.out.println("Adding " + Arrays.toString(secondArray) + " to defaultdeque");
 
         try {
             defaultDeque = addToTop(secondArray, defaultDeque);
         } catch (DequeFullException e) {
             e.printStackTrace();
             returnValue = false;
-        }
+        }*/
         System.out.println();
         return returnValue;
     }
@@ -51,8 +50,7 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
     @Override
     public boolean testAddingBottomElements() {
         boolean returnValue = true;
-        String[] firstArray = {"bottom", "text", "1", "2"};
-        String[] secondArray = {"Text", "from", "second"};
+        String[] firstArray = {"a","b","c","d"};
         System.out.println("Adding " + Arrays.toString(firstArray) + " to deques bottom");
 
         try {
@@ -62,14 +60,14 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
             returnValue = false;
         }
 
-        System.out.println("Adding " + Arrays.toString(secondArray) + " to defaultdeques bottom");
+        /*System.out.println("Adding " + Arrays.toString(secondArray) + " to defaultdeques bottom");
 
         try {
             defaultDeque = addToBot(secondArray, defaultDeque);
         } catch (DequeFullException e) {
             e.printStackTrace();
             returnValue = false;
-        }
+        }*/
         System.out.println();
         return returnValue;
     }
@@ -85,13 +83,13 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
         }
         System.out.println("Top element on deque is: " + deqFirst);
 
-        String deqSecond = null;
+        /*String deqSecond = null;
         try {
             deqSecond = defaultDeque.peekFirst();
         } catch (DequeEmptyException e) {
             e.printStackTrace();
         }
-        System.out.println("Top element on defaultdeque is: " + deqSecond);
+        System.out.println("Top element on defaultdeque is: " + deqSecond);*/
         System.out.println();
     }
 
@@ -105,13 +103,13 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
         }
         System.out.println("Bot element on deque is: " + deqFirst);
 
-        String deqSecond = null;
+        /*String deqSecond = null;
         try {
             deqSecond = defaultDeque.peekLast();
         } catch (DequeEmptyException e) {
             e.printStackTrace();
         }
-        System.out.println("Bot element on defaultdeque is: " + deqSecond);
+        System.out.println("Bot element on defaultdeque is: " + deqSecond);*/
         System.out.println();
     }
 
@@ -122,19 +120,19 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
         String deqFirst;
         try {
             deqFirst = deque.pullFirst();
-            System.out.println(deqFirst);
+            System.out.println(deqFirst + " pulled, current head index: " + deque.getTopIndex());
         } catch (DequeEmptyException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Pulling first element from defaultdeque:");
+       /* System.out.println("Pulling first element from defaultdeque:");
         String deqSecond;
         try {
             deqSecond = defaultDeque.pullFirst();
             System.out.println(deqSecond);
         } catch (DequeEmptyException e) {
             e.printStackTrace();
-        }
+        }*/
         System.out.println();
     }
 
@@ -144,88 +142,107 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
         String deqFirst;
         try {
             deqFirst = deque.pullLast();
-            System.out.println(deqFirst);
+            System.out.println(deqFirst+ " pulled, current tail index: " + deque.getBotIndex());
         } catch (DequeEmptyException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Pulling last element from defaultdeque:");
+        /*System.out.println("Pulling last element from defaultdeque:");
         String deqSecond;
         try {
             deqSecond = defaultDeque.pullLast();
             System.out.println(deqSecond);
         } catch (DequeEmptyException e) {
             e.printStackTrace();
-        }
+        }*/
         System.out.println();
     }
 
     @Override
     public void clearEntireDeque() {
         deque.clear();
-        defaultDeque.clear();
+        //defaultDeque.clear();
     }
 
     @Override
     public void displayEntireArray() {
         String[] dequeArray = deque.toArray(new String[0]);
-        String[] defaultArray = defaultDeque.toArray(new String[0]);
+        //String[] defaultArray = defaultDeque.toArray(new String[0]);
 
         for (String ele:dequeArray){
             System.out.print("[" + ele + "] ");
         }
-        System.out.println();
+        /*System.out.println();
         for (String ele: defaultArray){
             System.out.print("[" + ele +"]");
-        }
+        }*/
         System.out.println();
     }
 
     @Override
     public void displaySize() {
         System.out.println("Deque current size: " + deque.size());
-        System.out.println("Deafult deque current size: " + defaultDeque.size());
+        //System.out.println("Deafult deque current size: " + defaultDeque.size());
     }
 
     @Override
     public void isDequeFull() {
         System.out.println("Deque is full? - " + deque.isArrayFull());
-        System.out.println("Defaultdeque is full? - " + defaultDeque.isArrayFull());
+        //System.out.println("Defaultdeque is full? - " + defaultDeque.isArrayFull());
     }
 
     @Override
     public void isDequeEmpty() {
-        System.out.println("Deque is full? - " + deque.isArrayEmpty());
-        System.out.println("Defaultdeque is full? - " + defaultDeque.isArrayEmpty());
+        System.out.println("Deque is empty? - " + deque.isArrayEmpty());
+        //System.out.println("Defaultdeque is full? - " + defaultDeque.isArrayEmpty());
     }
 
     @Override
-    public void doesItContain(Object element) {
-        System.out.println("Does deque contain: " + element + "? - " + deque.contains((String)element));
-        System.out.println("Does defaultdeque contain: " + element + "? - " + defaultDeque.contains((String)element));
+    public void doesItContain(String element) {
+        System.out.println("Does deque contain: " + element + "? - " + deque.contains(element));
     }
 
     public void displayTopIndex(){
         System.out.println("Deque topindex: " + deque.getTopIndex());
-        System.out.println("defaultDeque topindex: " + defaultDeque.getTopIndex());
+        //System.out.println("defaultDeque topindex: " + defaultDeque.getTopIndex());
     }
 
     public void displayBotIndex(){
         System.out.println("Deque Botindex: " + deque.getBotIndex());
-        System.out.println("defaultDeque Botindex: " + defaultDeque.getBotIndex());
+        //System.out.println("defaultDeque Botindex: " + defaultDeque.getBotIndex());
     }
 
     private ArrayDeque<String> addToTop(String[] elements, ArrayDeque<String> deque) throws DequeFullException{
+        int elementIndex = 0;
         for (String ele : elements){
+
             deque.addFirst(ele);
+
+            try {
+                System.out.println("Adding: " + elementIndex + " arrayIndex to " + deque.getTopIndex() +
+                        ". head-index, element: " + deque.peekFirst());
+            } catch (DequeEmptyException e) {
+                e.printStackTrace();
+            }
+            elementIndex++;
         }
+        System.out.println("Current Head index is " + deque.getTopIndex());
         return deque;
     }
 
     private ArrayDeque<String> addToBot(String[] elements, ArrayDeque<String> deque) throws DequeFullException{
+        int elementIndex = 0;
         for (String ele : elements){
             deque.addLast(ele);
+            try {
+                System.out.println("Adding: " + elementIndex + " arrayIndex to " + deque.getBotIndex() +
+                        ". tail-index, element: " + deque.peekLast());
+            } catch (DequeEmptyException e) {
+                e.printStackTrace();
+            }
+            elementIndex++;
         }
+        System.out.println("Current Tail index is " + deque.getBotIndex());
         return deque;
     }
 

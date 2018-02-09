@@ -1,6 +1,6 @@
 package Deque.Tests;
 
-public interface ArrayDequesTestInterface<E> {
+public interface ArrayDequesTestInterface {
     boolean testAddingTopElements(); // Top decrements index values as it grows
     boolean testAddingBottomElements(); // Bot increases index values as it grows
     void peekAtTop();
@@ -12,6 +12,6 @@ public interface ArrayDequesTestInterface<E> {
     void displaySize();
     void isDequeFull();
     void isDequeEmpty();
-    void doesItContain(E element);
+    void doesItContain(String element);
 
 }
