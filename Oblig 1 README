@@ -1,0 +1,73 @@
+a)
+Jeg har valgt å bruke RunTimeExceptions for min kode ettersom dei er errors some produserer ryddigere kode, og alle feilene koden min kan kaste er basert på bruker feil.  Disse kan brukeren ungå ved å kjøre sjekker før noe blir gjort med koden, som isArrayFull() eller isArrayEmpty()
+-Unchecked exception
+
+b)
+check
+
+c)
+kjøretids analyse
+
+
+
+size - O(1) / dem returnerer bare en variable
+addFirst -  O(1)| 5 små operasjoner, sjekk om array e fult, set topindex til dec(top,len) dec(top/len) er en operasjon
+				  set deque[tallet vi fikk] til elementent og increment numberofentries
+pullFirst - O(1)| sjekk om full, hent objektet, sett den plassen i deque til null, forandre head index
+								, inc(top, len) kjører en gang, numofentries --
+peekFirst - O(1)| sjekker om tom, returnerer objektet på index lagret
+
+d)
+check
+
+e)
+kjøretids analyse
+
+addLast - O(1) | sett elementet, increment numofentries, rask sjekk om den er full
+pullLast - O(1) | sjekk om full, hent en temp (2 operasjoner) , sett current til, num--
+peekLast - O(1) | sjekk om tom, hent indexen for tallet, return elemtet
+
+f)
+check
+
+g)
+kjøretids analyse
+clear - O(n) | setter alle verdiene til null--
+contians - O(n) | sjekker alle elementene om input er der
+toArray(T[] a) - O(n) | flytter alle elementene i copyOf
+
+h)
+er det forskjell mellom slutt og start på tvekø kjøretid?
+det er liten til ingen forskjell mellom slutt og start funksjonene til tvekøen, bare minimale ekstra sjekker men bunn i grunn er begge O(konstant) som utgjør minimal forskjel siden konstantene er så lave.
+
+
+i)
+
+//Kjøretids analyse: 
+	public static Double average(Integer[] values) {
+		Integer sum = 0; // O(1)
+		for (int i = 0; i < values.length; i++) {
+			sum += values[i]; // O(n)
+		}
+		return sum / values.length; // O(1)
+	}
+	public static IDeque<Integer> slidingAvg(Stack<Integer> values, int width) {
+		IDeque<Integer> window = new ArrayDeque<>(width);	// O(1)
+		IDeque<Double> averages = new ArrayDeque<>(values.size());  //O(1)
+		for (int i = 0; i < width; i++) {
+			window.pushFirst(0); // O(n)
+		}
+		for (int value : values) {	
+			window.pullLast(); // O(n)
+			window.pushFirst(value); // O(n)
+			Integer[] roll = window.toArray(new Integer[0]); // O(n)
+			Double average = average(roll);	// O(n)
+			averages.push(average);		// O(n)
+		}
+		return averages; 	// O(1)
+	}
+Ingene av metodene har nested loops så ingen O(n^2), selve kjøretiden ligger på hvilken av fori loopen og foreach loopen som bruker mest tid
+slidingAvg = O(n)
+average = O(n)
+
+For ekstra oppgavene 1 og 2 se ResizeableArrayDeque 
