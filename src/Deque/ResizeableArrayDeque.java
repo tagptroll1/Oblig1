@@ -19,16 +19,20 @@ public class ResizeableArrayDeque<E> extends ArrayDeque<E> {
         if (newCapacity >= MAX_CAPACITY){
             throw new DequeFullException("Tried to expand deque past MAX Capacity");
         }
+        int tempEntries = numberOfEntries;
         //deque = Arrays.copyOf(deque, newCapacity);
         @SuppressWarnings("unchecked")
         E[] tempDeque = (E[]) new Object[newCapacity];
-        for (int i = deque.length; i > 0; i--){
+        //for (int i = deque.length -1; i >= 0; i--){
+        for (int i = 0; i <  deque.length; i++) {
+
             if (!isArrayEmpty()){
-                tempDeque[i] = pullLast();
+                tempDeque[i] = pullFirst();
             } else {
                 throw new DequeEmptyException("Tried to pull element from empty deque");
             }
         }
+        numberOfEntries = tempEntries;
         deque = tempDeque;
         topIndex = 0;
         botIndex = numberOfEntries;
