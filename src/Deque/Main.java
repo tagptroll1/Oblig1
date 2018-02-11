@@ -2,10 +2,16 @@ package Deque;
 
 import Deque.Exceptions.DequeEmptyException;
 import Deque.Tests.ArrayDequeTestClass;
-import Deque.Tests.ArrayDequesTestInterface;
+import Deque.Tests.ResizeableArrayDequeTestClass;
 
 public class Main {
     public static void main(String[] args) {
+        //testArrayDeque();
+        testResizeableArrayDeque();
+
+
+    }
+    public static void testArrayDeque(){
         ArrayDequeTestClass tester = new ArrayDequeTestClass();
 
         // Tests Adding elements, peaks at the current top and displays the array for debug
@@ -21,6 +27,10 @@ public class Main {
         // Tries to pull from top and bottom, displays array and size afterwards
         tester.pullFromTop();
         tester.pullFromBot();
+        tester.addOneEntryTobot("Hello");
+        tester.displayBotIndex();
+        tester.pullFromBot();
+        tester.displayBotIndex();
         tester.displayEntireArray();
         tester.displaySize();
 
@@ -51,8 +61,19 @@ public class Main {
         tester.isDequeFull();
         tester.isDequeEmpty();
         System.out.println("Head and tail ");
-        deque.getTopIndex();
-        deque.getBotIndex();
+        tester.displayTopIndex();
+        tester.displayBotIndex();
+    }
 
+    public static void testResizeableArrayDeque(){
+        ResizeableArrayDequeTestClass tester2 = new ResizeableArrayDequeTestClass();
+        tester2.testAddingTopElements();
+        tester2.displayEntireArray();
+        tester2.testAddingBottomElements();
+        tester2.testAddingBottomElements();
+        tester2.displayEntireArray();
+        tester2.displaySize();
+        tester2.displayTopIndex();
+        tester2.displayBotIndex();
     }
 }

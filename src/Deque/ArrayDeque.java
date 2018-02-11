@@ -5,12 +5,12 @@ import Deque.Exceptions.DequeFullException;
 import java.util.Arrays;
 
 public class ArrayDeque<E> implements IDeque<E> {
-    private E[] deque;
-    private int numberOfEntries;
-    private int topIndex; // Head of Deque
-    private int botIndex; // Tail of Deque
+    protected E[] deque;
+    protected int numberOfEntries;
+    protected int topIndex; // Head of Deque
+    protected int botIndex; // Tail of Deque
     private static final int DEFAULT_CAPACITY = 10;
-    private static final int MAX_CAPACITY = 10000;
+    protected static final int MAX_CAPACITY = 10000;
 
     /**
      * Default constructor for Arraydeque, sets capacity to DEFAULT_CAPACITY / 10
@@ -45,7 +45,7 @@ public class ArrayDeque<E> implements IDeque<E> {
      * @param modulus the number to modulus through the array with, length of array
      * @return returns the incremented number, wraps around to start if passes array length
      */
-    private static int inc(int i, int modulus) {
+    protected static int inc(int i, int modulus) {
         if (++i >= modulus) {
             i = 0;
         }
@@ -58,7 +58,7 @@ public class ArrayDeque<E> implements IDeque<E> {
      * @param modulus modulus to wrap by, length of array
      * @return returns the decremented number, wrapped to end of array if bellow 0
      */
-    private static int dec(int i, int modulus) {
+    protected static int dec(int i, int modulus) {
         if (--i < 0) {
             i = modulus - 1;
         }
@@ -81,25 +81,32 @@ public class ArrayDeque<E> implements IDeque<E> {
         return topIndex;
     }
 
+    /**
+     * Function to see if the deque is full
+     * @return true if the deque is full, else false
+     */
+    public boolean isArrayFull(){
+        return (topIndex == botIndex && numberOfEntries > 0);
+    }
+
+    /**
+     * function to see if deque if empty
+     * @return true if empty, else false
+     */
+    public boolean isArrayEmpty(){
+        return (topIndex == botIndex && numberOfEntries <= 0);
+    }
+
     @Override
     public int size() {
         return numberOfEntries;
     }
 
     @Override
-    public boolean isArrayFull(){
-        return (topIndex == botIndex && numberOfEntries > 0);
-    }
-
-    @Override
-    public boolean isArrayEmpty(){
-        return (topIndex == botIndex && numberOfEntries <= 0);
-    }
-
-    @Override
     public void addFirst(E elem) throws DequeFullException {
         if (isArrayFull()){
-            throw new DequeFullException("sumting made top to bot");
+            throw new DequeFullException("addFirst couldn't add anymore elements to the deque, it's" +
+                    "either full or having index issues.");
         }
         deque[topIndex = dec(topIndex, deque.length)] = elem;
         numberOfEntries ++;
@@ -127,13 +134,14 @@ public class ArrayDeque<E> implements IDeque<E> {
 
     @Override
     public void addLast(E elem) throws DequeFullException {
+        if (isArrayFull()){
+            throw new DequeFullException("addLast couldn't add element to deque, " +
+                    "it's either full or head index is the same as tails");
+        }
+
         deque[botIndex] = elem;
         numberOfEntries ++;
-
-        if (isArrayFull() || topIndex == (botIndex = inc(botIndex, deque.length))){
-            throw new DequeFullException("addLast couldn't add element to deque, " +
-                                "it's either full or head index is the same as tails");
-        }
+        botIndex = inc(botIndex, deque.length);
     }
 
     @Override
@@ -141,7 +149,7 @@ public class ArrayDeque<E> implements IDeque<E> {
         if (isArrayEmpty()){
             throw new DequeEmptyException("Deque doesn't contain any entries");
         }
-        E temp = deque[dec(botIndex, deque.length)];
+        E temp = deque[dec(botIndex, deque.length)]; // stuff
         deque[botIndex = dec(botIndex, deque.length)] = null;
         numberOfEntries--;
         return temp;
@@ -156,7 +164,7 @@ public class ArrayDeque<E> implements IDeque<E> {
     }
 
     @Override
-    public boolean contains(E inputElem)  {
+    public boolean contains(Object inputElem) {
         if (isArrayEmpty()) {
             return false;
         }
@@ -169,6 +177,11 @@ public class ArrayDeque<E> implements IDeque<E> {
         return false;
     }
 
+    /**
+     * Alternative to toArray(T[] a) that doesn't require any parameters
+     *
+     * @return returns an Object[] array
+     */
     public Object[] toArray() {
         @SuppressWarnings("unchecked")
         E[]result = (E[])new Object[deque.length];

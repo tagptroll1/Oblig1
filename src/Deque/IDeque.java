@@ -16,20 +16,6 @@ public interface IDeque<E> {
     int size();
 
     /**
-     * Sjekker om arreyen som "er" dequen er full eller ikke
-     *
-     * @return true om den er full, false ellers
-     */
-    boolean isArrayFull();
-
-    /**
-     * sjekker om arrayen ikke har noen entries
-     *
-     * @return true om den er tom for entries, false ellers
-     */
-    boolean isArrayEmpty();
-
-    /**
      * Legger til et element på begynnelsen av samlingen.
      *
      * @param elem Elementet som skal legges til.
@@ -89,8 +75,7 @@ public interface IDeque<E> {
      * @param elem Elementet som kanskje er i samlingen.
      * @return retunerer true hvis elementet er i samlingen.
      */
-    boolean contains(E elem);
-
+    boolean contains(Object elem);
 
     /**
      * Retunerer en tabell med alle elementene i samlingen.

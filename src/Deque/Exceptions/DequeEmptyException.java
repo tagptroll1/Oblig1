@@ -1,6 +1,6 @@
 package Deque.Exceptions;
 
-public class DequeEmptyException extends Exception {
+public class DequeEmptyException extends RuntimeException {
     public DequeEmptyException(String message) {
         super(message);
     }
