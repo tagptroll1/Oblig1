@@ -6,12 +6,13 @@ import Deque.Tests.ResizeableArrayDequeTestClass;
 
 public class Main {
     public static void main(String[] args) {
+        // Tester for ArrayDeque og ResizeableArrayDeque
         //testArrayDeque();
         testResizeableArrayDeque();
 
 
     }
-    public static void testArrayDeque(){
+    private static void testArrayDeque(){
         ArrayDequeTestClass tester = new ArrayDequeTestClass();
 
         // Tests Adding elements, peaks at the current top and displays the array for debug
@@ -65,13 +66,16 @@ public class Main {
         tester.displayBotIndex();
     }
 
-    public static void testResizeableArrayDeque(){
+    private static void testResizeableArrayDeque(){
         ResizeableArrayDequeTestClass tester2 = new ResizeableArrayDequeTestClass();
+        // Test å legge til objekter på toppen
         tester2.testAddingTopElements();
         tester2.displayEntireArray();
+        // Legg til på bunnen til arrayet er fult, og videre
         tester2.testAddingBottomElements();
         tester2.testAddingBottomElements();
         tester2.displayEntireArray();
+        // Display stuff
         tester2.displaySize();
         tester2.displayTopIndex();
         tester2.displayBotIndex();

@@ -10,6 +10,9 @@ public class ResizeableArrayDequeTestClass extends ArrayDequeTestClass {
         deque = new ResizeableArrayDeque<>(6);
     }
 
+    /**
+     * @return returns the deque to allow for custom calling of deque functions
+     */
     @SuppressWarnings("unchecked")
     public ResizeableArrayDeque<String> getDeque() {
         return (ResizeableArrayDeque) deque;

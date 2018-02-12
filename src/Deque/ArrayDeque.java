@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 public class ArrayDeque<E> implements IDeque<E> {
     protected E[] deque;
-    protected int numberOfEntries;
-    protected int topIndex; // Head of Deque
-    protected int botIndex; // Tail of Deque
+    int numberOfEntries;
+    int topIndex; // Head of Deque
+    int botIndex; // Tail of Deque
     private static final int DEFAULT_CAPACITY = 10;
-    protected static final int MAX_CAPACITY = 10000;
+    static final int MAX_CAPACITY = 10000;
 
     /**
      * Default constructor for Arraydeque, sets capacity to DEFAULT_CAPACITY / 10
@@ -45,7 +45,7 @@ public class ArrayDeque<E> implements IDeque<E> {
      * @param modulus the number to modulus through the array with, length of array
      * @return returns the incremented number, wraps around to start if passes array length
      */
-    protected static int inc(int i, int modulus) {
+    static int inc(int i, int modulus) {
         if (++i >= modulus) {
             i = 0;
         }
@@ -58,7 +58,7 @@ public class ArrayDeque<E> implements IDeque<E> {
      * @param modulus modulus to wrap by, length of array
      * @return returns the decremented number, wrapped to end of array if bellow 0
      */
-    protected static int dec(int i, int modulus) {
+    static int dec(int i, int modulus) {
         if (--i < 0) {
             i = modulus - 1;
         }

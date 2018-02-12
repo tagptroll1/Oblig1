@@ -17,7 +17,10 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
     }
 
 
-
+    /**
+     * Adds 1 string to deque for fine testing
+     * @param a string to be added
+     */
     public void addOneEntryTobot(String a){
 
         if (!deque.isArrayFull()){
@@ -138,6 +141,12 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
         System.out.println("Deque Botindex: " + deque.getBotIndex());
     }
 
+    /**
+     * The "behind the scenes" to addElementtoTop
+     * @param elements list of elements to be added
+     * @param deque the deque to be added to
+     * @return returns the deque
+     */
     protected ArrayDeque<String> addToTop(String[] elements, ArrayDeque<String> deque){
         int elementIndex = 0;
         for (String ele : elements){
@@ -154,6 +163,12 @@ public class ArrayDequeTestClass implements ArrayDequesTestInterface {
         return deque;
     }
 
+    /**
+     * see addToTop
+     * @param elements Elements to be added to deque
+     * @param deque the deque
+     * @return filled deque
+     */
     protected ArrayDeque<String> addToBot(String[] elements, ArrayDeque<String> deque){
         int elementIndex = 0;
         for (String ele : elements){

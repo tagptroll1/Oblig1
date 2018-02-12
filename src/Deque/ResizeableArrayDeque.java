@@ -14,6 +14,9 @@ public class ResizeableArrayDeque<E> extends ArrayDeque<E> {
         super(capacity);
     }
 
+    /**
+     * Grows the array if it's full to double capacity.
+     */
     private void growArray(){
         int newCapacity = deque.length * 2;
         if (newCapacity >= MAX_CAPACITY){
@@ -41,6 +44,7 @@ public class ResizeableArrayDeque<E> extends ArrayDeque<E> {
     @Override
     public void addFirst(E elem){
         if (isArrayFull()){
+            // Only grow the array if its full
             growArray();
         }
         deque[topIndex = dec(topIndex, deque.length)] = elem;
@@ -50,6 +54,7 @@ public class ResizeableArrayDeque<E> extends ArrayDeque<E> {
     @Override
     public void addLast(E elem){
         if (isArrayFull()){
+            // Only grow the array if its full
             growArray();
         }
         deque[botIndex] = elem;
