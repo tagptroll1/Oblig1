@@ -17,6 +17,7 @@ class ArrayDequeTestClass {
     void setup() {
         deque = new ArrayDeque<>(10);
         rDeque = new ResizeableArrayDeque<>(11);
+
         deque.addFirst(3);
         deque.addFirst(2);
         deque.addLast(4);
@@ -30,21 +31,32 @@ class ArrayDequeTestClass {
         rDeque.addFirst(4);
         rDeque.addLast(5);
 
+
     }
 
     @Test
-    void testAddFirst(){
+    void testEmptyDeque(){
+        ArrayDeque<String> testDeque = new ArrayDeque<>();
+        ResizeableArrayDeque<String> testRDeque = new ResizeableArrayDeque<>();
+
+        assertTrue(testDeque.isArrayEmpty());
+        assertTrue(testRDeque.isArrayEmpty());
+        assertFalse(testDeque.isArrayFull());
+        assertFalse(testRDeque.isArrayFull());
+    }
+
+    @Test
+    void testAddFirst() {
         deque.addFirst(0);
         assertEquals(Integer.valueOf(0), deque.peekFirst());
 
         rDeque.addFirst(0);
         assertEquals(Integer.valueOf(0), rDeque.peekFirst());
-
     }
 
 
     @Test
-    void testAddLast(){
+    void testAddLast() {
         deque.addLast(0);
         assertEquals(Integer.valueOf(0), deque.peekLast());
 
@@ -59,13 +71,13 @@ class ArrayDequeTestClass {
     }
 
     @Test
-    void peekLast(){
+    void peekLast() {
         assertEquals(Integer.valueOf(5), deque.peekLast());
         assertEquals(Integer.valueOf(5), rDeque.peekLast());
     }
 
     @Test
-    void pullTop(){
+    void pullTop() {
         assertEquals(5, deque.size());
         assertEquals(Integer.valueOf(1), deque.pullFirst());
         assertEquals(4, deque.size());
@@ -78,7 +90,7 @@ class ArrayDequeTestClass {
     }
 
     @Test
-    void pullBot(){
+    void pullBot() {
         assertEquals(5, deque.size());
         assertEquals(Integer.valueOf(5), deque.pullLast());
         assertEquals(4, deque.size());
@@ -91,7 +103,7 @@ class ArrayDequeTestClass {
     }
 
     @Test
-    void testClear(){
+    void testClear() {
         deque.clear();
         rDeque.clear();
 
@@ -103,90 +115,12 @@ class ArrayDequeTestClass {
         assertThrows(DequeEmptyException.class, () -> rDeque.peekLast());
     }
 
-//    @Override
-//    public void clearEntireDeque() {
-//        deque.clear();
-//    }
-//
-//    @Override
-//    public void displayEntireArray() {
-//        String[] dequeArray = deque.toArray(new String[0]);
-//
-//        for (String ele:dequeArray){
-//            System.out.print("[" + ele + "] ");
-//        }
-//
-//        System.out.println();
-//    }
-//
-//    @Override
-//    public void displaySize() {
-//        System.out.println("Deque current size: " + deque.size());
-//    }
-//
-//    @Override
-//    public void isDequeFull() {
-//        System.out.println("Deque is full? - " + deque.isArrayFull());
-//    }
-//
-//    @Override
-//    public void isDequeEmpty() {
-//        System.out.println("Deque is empty? - " + deque.isArrayEmpty());
-//    }
-//
-//    @Override
-//    public void doesItContain(String element) {
-//        System.out.println("Does deque contain: " + element + "? - " + deque.contains(element));
-//    }
-//
-//    public void displayTopIndex(){
-//        System.out.println("Deque topindex: " + deque.getTopIndex());
-//    }
-//
-//    public void displayBotIndex(){
-//        System.out.println("Deque Botindex: " + deque.getBotIndex());
-//    }
-//
-//    /**
-//     * The "behind the scenes" to addElementtoTop
-//     * @param elements list of elements to be added
-//     * @param deque the deque to be added to
-//     * @return returns the deque
-//     */
-//    protected ArrayDeque<String> addToTop(String[] elements, ArrayDeque<String> deque){
-//        int elementIndex = 0;
-//        for (String ele : elements){
-//
-//            deque.addFirst(ele);
-//
-//            if (!deque.isArrayEmpty()){
-//                System.out.println("Adding: " + elementIndex + " arrayIndex to " + deque.getTopIndex() +
-//                        ". head-index, element: " + deque.peekFirst());
-//            }
-//            elementIndex++;
-//        }
-//        System.out.println("Current Head index is " + deque.getTopIndex());
-//        return deque;
-//    }
-//
-//    /**
-//     * see addToTop
-//     * @param elements Elements to be added to deque
-//     * @param deque the deque
-//     * @return filled deque
-//     */
-//    protected ArrayDeque<String> addToBot(String[] elements, ArrayDeque<String> deque){
-//        int elementIndex = 0;
-//        for (String ele : elements){
-//            deque.addLast(ele);
-//            if (!deque.isArrayEmpty()) {
-//                System.out.println("Adding: " + elementIndex + " arrayIndex to " + deque.getBotIndex() +
-//                        ". tail-index, element: " + deque.peekLast());
-//            }
-//            elementIndex++;
-//        }
-//        System.out.println("Current Tail index is " + deque.getBotIndex());
-//        return deque;
-//    }
-//
+    @Test
+    void testToArray() {
+        Integer[] testArray = {4, 5, null, null, null, null, null, 1, 2, 3};
+        assertArrayEquals(testArray, deque.toArray(new Integer[0]));
+
+        Integer[] testArray2 = {3, 5, null, null, null, null, null, null, 4, 2, 1};
+        assertArrayEquals(testArray2, rDeque.toArray(new Integer[0]));
+    }
 }

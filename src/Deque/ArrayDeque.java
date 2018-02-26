@@ -94,7 +94,7 @@ public class ArrayDeque<E> implements IDeque<E> {
      * @return true if empty, else false
      */
     public boolean isArrayEmpty(){
-        return (topIndex == botIndex && numberOfEntries <= 0);
+        return (numberOfEntries <= 0);
     }
 
     @Override
@@ -196,9 +196,10 @@ public class ArrayDeque<E> implements IDeque<E> {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
-        Arrays.fill(deque, null);
+        deque = (E[]) new Object[deque.length];
         numberOfEntries = 0;
         topIndex = 0;
         botIndex = 0;
